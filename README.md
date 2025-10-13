@@ -1,4 +1,4 @@
-# Multimodal RAG System - SIH 2025 Prototype
+# Multimodal RAG System - UI Prototype
 
 A comprehensive offline Retrieval-Augmented Generation (RAG) system prototype designed to demonstrate multimodal search capabilities across text, images, and audio content.
 
