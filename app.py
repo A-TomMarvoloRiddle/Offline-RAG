@@ -284,17 +284,20 @@ def main():
     
     with col1:
         st.markdown("### 🔍 Search Query")
+        
+        # Check for demo query from sidebar first
+        if hasattr(st.session_state, 'demo_query'):
+            default_query = st.session_state.demo_query
+            delattr(st.session_state, 'demo_query')
+        else:
+            default_query = ""
+        
         query = st.text_input(
             "Enter your search query:",
             placeholder="e.g., 'Show me the report about quarterly revenue growth'",
-            key="main_query"
+            key="main_query",
+            value=default_query
         )
-        
-        # Check for demo query from sidebar
-        if hasattr(st.session_state, 'demo_query'):
-            query = st.session_state.demo_query
-            st.session_state.main_query = query
-            delattr(st.session_state, 'demo_query')
     
     with col2:
         st.markdown("### 📎 Upload Files")
