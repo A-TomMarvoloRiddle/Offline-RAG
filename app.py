@@ -14,8 +14,8 @@ from demo_data import (
     create_demo_chart_image,
     create_demo_diagram_image
 )
-
 # Page configuration
+
 st.set_page_config(
     page_title="Multimodal RAG System - SIH 2025",
     page_icon="🔍",
