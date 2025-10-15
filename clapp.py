@@ -230,15 +230,15 @@ MOCK_RESULTS = {
         {
             "id": 3,
             "description": "Revenue growth chart showing Q1-Q4 2024 performance metrics with projections for 2025",
-            "source": "Financial_Presentation.pdf",
-            "page": 8,
+            "source": "Financial_Presentation.png",
+            "page": 1,
             "relevance": 0.92
         },
         {
             "id": 4,
             "description": "Product roadmap diagram illustrating development timeline and key milestones",
-            "source": "Strategy_Document.pdf",
-            "page": 15,
+            "source": "Strategy_Document.jpg",
+            "page": 1,
             "relevance": 0.85
         }
     ],
@@ -269,14 +269,14 @@ CITATION_DETAILS = {
         "context": "Consumer behavior study conducted across 5,000 participants examining purchasing patterns and sustainability preferences in technology sector."
     },
     3: {
-        "type": "PDF Image",
+        "type": "PNG Image",
         "title": "Revenue Growth Chart",
         "author": "CFO Office",
         "date": "December 31, 2024",
         "context": "Visual representation of quarterly revenue trends with comparative analysis against industry benchmarks and forecast models."
     },
     4: {
-        "type": "PDF Image",
+        "type": "PNG Image",
         "title": "Product Roadmap",
         "author": "Product Management",
         "date": "January 10, 2025",
@@ -340,7 +340,7 @@ def show_landing_page():
     <div class="main-header">
         <h1>IntelliSearch</h1>
         <p style="font-size: 1.2rem; margin: 0;">Advanced Research Intelligence Platform</p>
-        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Multimodal Retrieval-Augmented Generation | Academic-Grade Analysis</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Multimodal Retrieval-Augmented Generation</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -351,7 +351,7 @@ def show_landing_page():
     st.markdown("###  Search Across All Your Content")
     query = st.text_input(
         "Enter your query",
-        placeholder="e.g., Show me the revenue report from Q4 2024...",
+        placeholder="e.g., Show me the sales analysis of 2024...",
         label_visibility="collapsed"
     )
     
@@ -380,7 +380,7 @@ def show_landing_page():
                 st.rerun()
             else:
                 st.warning("Please enter a query or upload files to search!")
-                
+
     # Add Recent Queries Section on Landing Page
     st.markdown("###  Recent Queries")
     cols = st.columns(2)
@@ -415,7 +415,7 @@ def show_loading_animation():
         for i, stage in enumerate(stages):
             status_text.text(stage)
             progress_bar.progress((i + 1) / len(stages))
-            time.sleep(0.5)
+            time.sleep(3)
         
         progress_bar.empty()
         status_text.empty()
@@ -496,7 +496,7 @@ def show_results():
     st.markdown(f"""
     <div class="main-header">
         <h1>Research Analysis</h1>
-        <p style="font-size: 1rem; margin: 0.5rem 0 0 0;">Query: "{query_to_show}"</p>
+        <p style="font-size: 1.5rem; margin: 0.5rem 0 0 0;">Query: "{query_to_show}"</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -589,14 +589,25 @@ def show_results():
                     """, unsafe_allow_html=True)
                     
                     # Media thumbnail
-                    st.markdown(f"""
-                    <div class="media-thumbnail">
-                        <div style="text-align: center;">
-                            <p style="color: #60a5fa; font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;"> Chart Visualization</p>
-                            <p style="color: #9ca3af; font-size: 0.9rem;">Revenue Growth Q1-Q4 2024</p>
+                    # Replace the media thumbnail section with actual image display
+                    #if result.get('image_path'):
+                        # If you have actual image files
+                        #st.image(result['image_path'], use_container_width=True)
+                    # Replace the media thumbnail section with actual image display
+                    if result['id'] == 3:
+                        st.image("Q4 Revenue Table.jpg", use_container_width=True)
+                    elif result['id'] == 4:
+                        st.image("Q4_Rev Analysis.jpg", use_container_width=True)
+                    else:
+                        # For demo purposes with placeholder
+                        st.markdown(f"""
+                        <div class="media-thumbnail">
+                            <div style="text-align: center;">
+                                <p style="color: #60a5fa; font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">📊 Chart Visualization</p>
+                                <p style="color: #9ca3af; font-size: 0.9rem;">{result["description"]}</p>
+                            </div>
                         </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                        """, unsafe_allow_html=True)
                     
                     # Description content
                     st.markdown(f"""
@@ -666,6 +677,6 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #64748b; padding: 1rem; font-family: 'Times New Roman', serif;">
     <p style="font-size: 0.9rem; margin: 0.5rem 0;">IntelliSearch Research Platform | SIH 2025 Project</p>
-    <p style="font-size: 0.8rem; margin: 0;">Academic-Grade Analysis  100% Offline & Secure</p>
+    <p style="font-size: 0.8rem; margin: 0;">Research - Grade Analysis 100% Offline & Secure</p>
 </div>
 """, unsafe_allow_html=True)
